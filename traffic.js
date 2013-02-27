@@ -36,7 +36,19 @@ $(document).ready(function () {
 
   var svg = d3.select("body").insert("svg:svg", "h2")
     .attr("width", w)
-    .attr("height", h);
+    .attr("height", h)
+    //.call(d3.behavior.zoom().on("zoom", zoom));
+    .call(d3.behavior.zoom().on("zoom",zoom));
+
+
+  function zoom() {
+      trans=d3.event.translate;
+      scale=d3.event.scale;
+      viz = d3.selectAll("line");
+      viz.attr("transform", "translate(" + trans + ")" + " scale(" + scale + ")");
+      //console.log(scale);
+      //console.log(trans);
+  }
 
   var sw_lat, sw_lon;
   var json_sensors;
@@ -157,6 +169,15 @@ $(document).ready(function () {
 
   /* Draw the lines between the sensors with appropriate color from 'reading' array */
   var redraw = function() {
+
+    /* Crucial: get rid of everything so we don't just keep adding elements that we have to track */
+    d3.selectAll("svg").remove();
+
+    svg = d3.select("body").insert("svg", "h2")
+      .attr("width", w)
+      .attr("height", h)
+      .call(d3.behavior.zoom().on("zoom", zoom));
+
     for(routename in route) {
       testroute = route[routename];
       //console.log("changing routes: "+routename+" number of points: "+testroute.length);

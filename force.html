@@ -1,7 +1,7 @@
 <html lang="en">
 <script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="d3.v2.js"      type="text/javascript"></script>
-<script src="traffic.js"    type="text/javascript"></script>
+<script src="force_traffic.js"    type="text/javascript"></script>
 <script src="xml2json.js"   type="text/javascript"></script>
 <script src="json2.js"      type="text/javascript"></script>
 <head>
@@ -48,9 +48,11 @@
     stroke: steelblue;
     stroke-width: 1.5px;
 }
+/*
 .node {
   fill: #000;
 }
+*/
 
 .cursor {
   fill: none;
@@ -64,24 +66,22 @@
 
 circle.node {
     cursor: pointer;
-      stroke: #3182bd;
-        stroke-width: 1.5px;
+    /*stroke: #3182bd;*/
+    stroke: "white";
+    /*stroke-width: 1.5px; */
 }
 
 line.link {
     fill: none;
-      stroke: #9ecae1;
-        stroke-width: 1.5px;
+    stroke: #9ecae1;
+    stroke-width: 2px;
 }
 
 </style>
 </head>
 <body>
-    <div id="traffic"></div>
-    <p>
     <div id="forcetraffic"></div>
-    <p>
-    Click and drag to pan, scroll to zoom.
+    <!-- Click and drag to pan, scroll to zoom. -->
     <div id="timestamp">Data current as of <span id="latest_time"></span></div>
 </body>
 </html>
